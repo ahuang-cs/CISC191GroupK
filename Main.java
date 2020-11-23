@@ -12,6 +12,7 @@ public class Main {
 	System.out.println("Enter up to 5 dates you are available by month/day/year (type 'exit' if you have less than 5 dates):");
 	for(int i = 0; i < 5; i++) {
         userDate = scnr.nextLine();
+        //exit is used when the user has less than 5 entries
         if(userDate.equals("exit")){
         	break;
 		}
@@ -19,13 +20,15 @@ public class Main {
 	 }
 
 	Date user1 = new Date(dateList);
-
+	// this if statement is to decipher whether or not the input of dates has backslashes in them
+		//if they do not then the method call to parseDate() will fix that
 	if(dateList.get(0).contains("/")){
 		user1.getDate();
 	 }else{
 		user1.parseDate();
 	}
-
+	//once user1's date list is set the choices for user2 are provided
+     user1.user2Chooses();
 
     }
 }
