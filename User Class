@@ -45,7 +45,7 @@ public class UserClass {
 
     public void printInfo() {
         System.out.println();
-        System.out.println("Confirm your Information is correct.");
+        System.out.println("Confirm that your Information is correct.");
         System.out.println("Name: " + name);
         System.out.println("Age: " + age);
         System.out.println("Location: " + location);
