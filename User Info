@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.lang.*;
 
 
-public class UserClass {
+public class UserInfo {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
