@@ -3,7 +3,7 @@ package com.company;
 public class UserClass {
 
     protected String name;
-    protected String age;
+    protected int age;
     protected String location;
     protected String profession;
 
@@ -16,11 +16,11 @@ public class UserClass {
         return name;
     }
 
-    public void setAge(String userAge) {
+    public void setAge(int userAge) {
         age = userAge;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -39,5 +39,16 @@ public class UserClass {
     public String getProfession() {
         return profession;
 
+
+
+    }
+
+    public void printInfo() {
+        System.out.println();
+        System.out.println("Confirm your Information is correct.");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Location: " + location);
+        System.out.println("Profession: " + profession);
     }
 }
