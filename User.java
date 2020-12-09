@@ -32,6 +32,6 @@ public class User {
         System.out.println("Name: " + name);
         System.out.println("Age: " + age);
         System.out.println("Location: " + location);
-        System.out.println("Profession: " + profession);
+        System.out.println("Profession: " + profession + "\n");
     }
 }

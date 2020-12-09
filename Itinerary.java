@@ -14,7 +14,7 @@ public class Itinerary {
         System.out.println();
         System.out.println("Your event: " + event);
         System.out.println("Meeting location: " + location);
-        System.out.println("Description of meeting: "+ description);
+        System.out.println("Description of meeting: "+ description + "\n");
     }
 
 }
