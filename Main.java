@@ -1,13 +1,51 @@
+/*
+Author: Armin Irvije
+Description: This class is to hold the methods that prompt the user for User, Itinerary, Date, and Time information
+ */
+
 package com.company;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Main {
 
-    public static void main(String[] args) {
-	Scanner scnr = new Scanner(System.in);
-	/*
-	This is to fill the information for the Itinerary class
-	 */
+//this method prompts user for dates and stores them in a arraylist
+	public ArrayList<String> enterDates(){
+		Scanner scnr = new Scanner(System.in);
+		String userDate;
+		ArrayList<String> dateList = new ArrayList<>();
+
+		System.out.println("Enter up to 5 dates you are available by month/day/year (type 'exit' if you have less than 5 dates):");
+		for(int i = 0; i < 5; i++) {
+			userDate = scnr.nextLine();
+			//exit is used when the user has less than 5 entries
+			if(userDate.equals("exit")){
+				break;
+			}
+			dateList.add(userDate);
+		}
+		return dateList;
+	}
+
+//this method prompts user for times during the day
+	public ArrayList<String> enterTime(){
+		Scanner scnr = new Scanner(System.in);
+		String userTime;
+		ArrayList<String> timeList = new ArrayList<>();
+		System.out.println("\nEnter the times out of day that you can meet 0:00 am/pm (type 'exit' once you are finished): ");
+		for(int i = 0; i < 12; i++){
+			userTime = scnr.nextLine();
+			if(userTime.equals("exit")){
+				break;
+			}
+			timeList.add(userTime);
+		}
+		return timeList;
+	}
+
+// this method prompts user for description of meeting
+	public void itineraryInfo(){
+		Scanner scnr = new Scanner(System.in);
+
 		String event, location, description;
 		System.out.println("Enter the name of the Event: ");
 		event = scnr.nextLine();
@@ -20,11 +58,12 @@ public class Main {
 
 		Itinerary itinerary = new Itinerary(event, location, description);
 		itinerary.printItinerary();
+	}
 
+//prompts user personal information
+	public void userInfo(){
+		Scanner scnr = new Scanner(System.in);
 
-	/*
-	This is to fill the information for the User class
-	 */
 		User User1 = new User();
 
 
@@ -38,7 +77,7 @@ public class Main {
 		System.out.println("Enter your age: ");
 		age = Integer.parseInt(scnr.nextLine());
 
-		System.out.println("Enter your location: ");
+		System.out.println("Enter your neighborhood: ");
 		neighborhood = scnr.nextLine();
 
 		System.out.println("Enter your profession: ");
@@ -50,38 +89,5 @@ public class Main {
 		User1.setProfession(profession);
 		User1.printInfo();
 
-
-
-
-	/*
-	This is to create an instance of date class and call the methods
-	 */
-	String userDate;
-	ArrayList<String> dateList = new ArrayList<>();
-
-
-	System.out.println("Enter up to 5 dates you are available by month/day/year (type 'exit' if you have less than 5 dates):");
-	for(int i = 0; i < 5; i++) {
-        userDate = scnr.nextLine();
-        //exit is used when the user has less than 5 entries
-        if(userDate.equals("exit")){
-        	break;
-		}
-        dateList.add(userDate);
-	 }
-
-	Date user1 = new Date(dateList);
-	/*
-		 this if statement is to decipher whether or not the input of dates has backslashes in them
-		 if they do not then the method call to parseDate() will fix that
-		*/
-		if(dateList.get(0).contains("/")){
-		user1.getDate();
-	 }else{
-		user1.parseDate();
 	}
-	//once user1's date list is set the choices for user2 are provided
-     user1.user2Chooses();
-
-    }
 }

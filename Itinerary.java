@@ -1,5 +1,8 @@
+/*
+Author: Armin Irvije
+Description: This class stores and prints out the information of the event
+ */
 package com.company;
-
 public class Itinerary {
     protected String event;
     protected String location;

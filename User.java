@@ -1,5 +1,9 @@
-package com.company;
+/*
+Author: Patrick Nguyen
+Description: This class sets and prints out the personal information of the users
+ */
 
+package com.company;
 public class User {
 
     protected String name;
