@@ -1,94 +1,50 @@
+/*
+Author: Armin Irvije
+Description: This Server class creates a server that connects to a client.
+The server is the initial user who creates the event and chooses the initial dates and times
+ */
+
 package com.company;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Server {
     public static final int PORT = 1234;
-    ArrayList<String> networkDates = new ArrayList<>();
-    String netDate;
+
 
     public Server() throws Exception{
-        Scanner scnr= new Scanner(System.in);
         ServerSocket serverSock = new ServerSocket(PORT);
-        System.out.println("Server is running!");
 
         //accept connection from client
         Socket socket = serverSock.accept();
+
         ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());
+        Main main =  new Main();
+
+	//This is to fill the information for the Itinerary class
+        main.itineraryInfo();
+
+	//This is to fill the information for the User class
+        main.userInfo();
+
+        Date serverDate = new Date(main.enterDates()); //prompt user for dates to create the date arraylist
+        outStream.writeObject(serverDate);// sends object serverDate to client
+
+        Time serverTime = new Time(main.enterTime());//prompts user to create time array
+        outStream.writeObject(serverTime);//sends object to client
 
 
-		/*
-	This is to fill the information for the Itinerary class
-	 */
-        String event, location, description;
-        System.out.println("Enter the name of the Event: ");
-        event = scnr.nextLine();
-
-        System.out.println("Enter location of meeting: ");
-        location = scnr.nextLine();
-
-        System.out.println("Enter a description of Event: ");
-        description = scnr.nextLine();
-
-        Itinerary itinerary = new Itinerary(event, location, description);
-        itinerary.printItinerary();
-
-        /*
-	This is to fill the information for the User class
-	 */
-        User User1 = new User();
-
-
-        String name, neighborhood, profession;
-        int age;
-
-
-        System.out.println("Enter your name: ");
-        name = scnr.nextLine();
-
-        System.out.println("Enter your age: ");
-        age = Integer.parseInt(scnr.nextLine());
-
-        System.out.println("Enter your location: ");
-        neighborhood = scnr.nextLine();
-
-        System.out.println("Enter your profession: ");
-        profession = scnr.nextLine();
-
-        User1.setName(name);
-        User1.setAge(age);
-        User1.setLocation(neighborhood);
-        User1.setProfession(profession);
-        User1.printInfo();
-
-         //prompt user for dates to create the date arraylist
-        System.out.println("Enter up to 5 dates you are available by month/day/year (type 'exit' if you have less than 5 dates):");
-        for(int i = 0; i < 5; i++) {
-            netDate = scnr.nextLine();
-            //exit is used when the user has less than 5 entries
-            if(netDate.equals("exit")){
-                break;
-            }
-            networkDates.add(netDate);
-        }
-
-
-
-       // sends object clientDate to client
-        Date serverDate = new Date(networkDates);
-        outStream.writeObject(serverDate);
-
-        //receive the new datelist from client
+        //receive the new ArrayLists from client
         Date clientDates = (Date)inStream.readObject();
-        clientDates.getDate();
+        Time clientTime = (Time)inStream.readObject();
 
-
-
+        System.out.println("\nThe following date(s) that work for both of you are: ");
+        clientDates.getArray();
+        System.out.println("The following time(s) that work for both of you are: ");
+        clientTime.getArray();
 
 
         serverSock.close();
