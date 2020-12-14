@@ -46,7 +46,7 @@ public class Client {
         serverTime.getSecondUserArray();
 
 
-       // outStream.close();
+       outStream.close();
         socket.close();
     }
 }
